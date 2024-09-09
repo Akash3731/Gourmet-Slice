@@ -1,7 +1,7 @@
 
 # Gourmet Slice
 
-Gourmet Slice is a food ordering web application that allows users to browse, order, and manage food items online. The application includes an admin dashboard for managing products and orders. Currently we're facing some issues with deployment, sorry for the inconvenience.
+Gourmet Slice is a food ordering web application that allows users to browse, order, and manage food items online. The application includes an admin dashboard for managing products and orders. 
 
 
 ## Features
