@@ -67,6 +67,9 @@ const Admin = () => {
         }
       );
 
+      console.log('Users:', usersResponse.data); // Logging users data
+      console.log('Orders:', ordersResponse.data); // Logging orders data
+
       setUsers(usersResponse.data);
       setOrders(ordersResponse.data);
     } catch (error) {
@@ -275,117 +278,80 @@ const Admin = () => {
           )}
         </form>
 
-        <div className="bg-white shadow-md rounded-md p-4">
+        <div>
           <h3 className="text-2xl font-bold mb-4 flex items-center">
-            <FaListUl className="mr-2" /> Product List
+            <FaListUl className="mr-2" />
+            Products
           </h3>
-          {products.length > 0 ? (
-            <ul className="space-y-4">
-              {products.map((product) => (
-                <li
-                  key={product._id}
-                  className="p-4 bg-gray-100 rounded-md flex justify-between items-center"
-                >
-                  <div>
-                    <h5 className="text-lg font-bold flex items-center">
-                      {product.category === "Veg" && (
-                        <FaLeaf className="mr-2 text-green-600" />
-                      )}
-                      {product.category === "Non-Veg" && (
-                        <FaDrumstickBite className="mr-2 text-red-600" />
-                      )}
-                      {product.category === "Beverage" && (
-                        <FaCoffee className="mr-2 text-blue-600" />
-                      )}
-                      {product.name}
-                    </h5>
-                    <p>{product.description}</p>
-                    <p>${product.price}</p>
-                    {product.image && (
-                      <img
-                        src={`https://gourmet-slice.onrender.com/${product.image}`}
-                        alt={product.name}
-                        className="mt-2 h-24 w-24 object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="flex items-center">
-                    <button
-                      className="bg-yellow-500 text-white py-1 px-2 rounded-md shadow-sm hover:bg-yellow-700 mr-2"
-                      onClick={() => handleEdit(product)}
-                    >
-                      <FaEdit /> Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white py-1 px-2 rounded-md shadow-sm hover:bg-red-700"
-                      onClick={() => handleDelete(product._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-center">No products available.</p>
-          )}
+          <ul>
+            {products.map((product) => (
+              <li
+                key={product._id}
+                className="border p-2 mb-2 flex justify-between items-center"
+              >
+                <span>{product.name}</span>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="bg-blue-500 text-white py-1 px-2 rounded-md shadow-sm hover:bg-blue-700 flex items-center"
+                  >
+                    <FaEdit className="mr-1" /> Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="bg-red-500 text-white py-1 px-2 rounded-md shadow-sm hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
-      <h3 className="text-2xl font-bold text-center mb-4 flex items-center justify-center">
-        <FaUser className="mr-2" /> User List and Their Orders
+      <h3 className="text-2xl font-bold mb-4 flex items-center">
+        <FaUser className="mr-2" />
+        Users & Orders
       </h3>
+
       {loadingUsers ? (
-        <p className="text-center">Loading users...</p>
+        <p>Loading users and orders...</p>
       ) : (
         users.map((user) => (
-          <div key={user._id} className="mb-6">
-            <div className="bg-white shadow-md rounded-md">
-              <div
-                className={`p-4 flex justify-between items-center cursor-pointer transition duration-300 ease-in-out ${
-                  expandedUser === user._id ? "bg-green-200" : ""
-                } hover:bg-green-100`}
-                onClick={() => toggleUserOrders(user._id)}
-              >
-                <h5 className="text-lg font-bold flex items-center">
-                  <FaUser className="mr-2" /> {user.email}
-                </h5>
-                <span>{expandedUser === user._id ? "▲" : "▼"}</span>
-              </div>
-              {expandedUser === user._id && (
-                <div className="p-4 border-t">
-                  <h6 className="font-bold flex items-center">
-                    <FaShoppingCart className="mr-2" /> Orders:
-                  </h6>
-                  {orders
-                    .filter((order) => order.user._id === user._id)
-                    .map((order) => (
-                      <div key={order._id} className="border p-2 mb-2">
-                        <p>Order ID: {order._id}</p>
-                        <p>Status: {order.status}</p>
-                        <p>Total: ${order.total.toFixed(2)}</p>
-                      </div>
-                    ))}
-                </div>
-              )}
+          <div key={user._id} className="border p-2 mb-2">
+            <div
+              className="cursor-pointer"
+              onClick={() => toggleUserOrders(user._id)}
+            >
+              <p className="font-bold">{user.name}</p>
+              <p>{user.email}</p>
+              <p>{user.isAdmin ? "Admin" : "Customer"}</p>
             </div>
+
+            {expandedUser === user._id && (
+              <div className="pl-4">
+                <h4 className="text-lg font-bold mt-2">Orders:</h4>
+                {orders
+                  .filter((order) => order?.user?._id === user._id)
+                  .map((order) => (
+                    <div key={order._id} className="border p-2 mb-2">
+                      <p>Order ID: {order._id}</p>
+                      <p>Status: {order.status}</p>
+                      <p>Total: ${order.total.toFixed(2)}</p>
+                    </div>
+                  ))}
+              </div>
+            )}
           </div>
         ))
       )}
 
-      <div className="text-center mt-6">
-        <Link to="/order-food">
-          <button className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700">
-            Go to Order Food Page
-          </button>
-        </Link>
-      </div>
-
       <button
         onClick={handleLogout}
-        className="mt-8 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 flex items-center justify-center"
+        className="w-full bg-red-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 mt-8 flex items-center justify-center"
       >
-        <FaSignOutAlt className="mr-2" /> Sign Out
+        <FaSignOutAlt className="mr-2" /> Logout
       </button>
     </div>
   );
