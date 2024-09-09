@@ -30,7 +30,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/user/profile-image",
+        "https://gourmet-slice.onrender.com/api/user/profile-image",
         {
           method: "PUT",
           body: formData,
@@ -70,7 +70,7 @@ const Profile = () => {
 
   const imageUrl = image.startsWith("http")
     ? image
-    : `http://localhost:5000/${image.replace(/\\/g, "/")}`;
+    : `https://gourmet-slice.onrender.com/${image.replace(/\\/g, "/")}`;
 
   return (
     <div className="container mx-auto p-6">

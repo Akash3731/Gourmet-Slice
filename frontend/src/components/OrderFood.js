@@ -29,7 +29,9 @@ const OrderFood = () => {
   useEffect(() => {
     const fetchFoodItems = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get(
+          "https://gourmet-slice.onrender.com/api/products"
+        );
         setFoodItems(res.data);
         const initialQuantities = {};
         res.data.forEach((item) => {
@@ -156,7 +158,7 @@ const OrderFood = () => {
                       key={item._id}
                     >
                       <img
-                        src={`http://localhost:5000/${item.image}`} // Updated line for image source
+                        src={`https://gourmet-slice.onrender.com/${item.image}`} // Updated line for image source
                         alt={item.name}
                         className="w-full h-48 object-cover rounded-md mb-4 border border-gray-300"
                       />

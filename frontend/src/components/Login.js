@@ -26,7 +26,10 @@ function Login() {
       return;
     }
     try {
-      const res = await axios.post("http://localhost:5000/login", formData);
+      const res = await axios.post(
+        "https://gourmet-slice.onrender.com/login",
+        formData
+      );
       setMessage(res.data.msg);
       const token = res.data.token;
       login(token);

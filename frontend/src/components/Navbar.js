@@ -28,7 +28,7 @@ const NavigationBar = () => {
         try {
           console.log("User ID for profile image fetch:", user.id); // Log the user ID
           const response = await axios.get(
-            `http://localhost:5000/${user.id}/profile-image` // Corrected line
+            `https://gourmet-slice.onrender.com/${user.id}/profile-image` // Corrected line
           );
 
           // Log the response for debugging
@@ -110,7 +110,7 @@ const NavigationBar = () => {
                 <button onClick={toggleDropdown} className="focus:outline-none">
                   {profileImage ? ( // Use the fetched profile image
                     <img
-                      src={`http://localhost:5000/${profileImage}`} // Update image source to include the base URL
+                      src={`https://gourmet-slice.onrender.com/${profileImage}`} // Update image source to include the base URL
                       alt="Profile"
                       className="w-10 h-10 rounded-full object-cover border-2 border-white"
                       onError={(e) => {

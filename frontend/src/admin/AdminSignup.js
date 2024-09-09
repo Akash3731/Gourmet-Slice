@@ -19,7 +19,7 @@ const AdminSignup = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/admin-sign-up",
+        "https://gourmet-slice.onrender.com/admin-sign-up",
         formData
       );
       setMessage(res.data.msg);

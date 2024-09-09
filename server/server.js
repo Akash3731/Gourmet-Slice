@@ -67,6 +67,7 @@ app.post("/sign-up", async (req, res) => {
       .status(201)
       .json({ msg: "User registered successfully", token, name: user.name });
   } catch (err) {
+    console.error(err);
     res.status(500).send("Server error");
   }
 });

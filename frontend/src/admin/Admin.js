@@ -45,7 +45,7 @@ const Admin = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/products");
+      const response = await axios.get("https://gourmet-slice.onrender.com/api/products");
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -57,11 +57,11 @@ const Admin = () => {
     if (!token) return;
 
     try {
-      const usersResponse = await axios.get("http://localhost:5000/api/users", {
+      const usersResponse = await axios.get("https://gourmet-slice.onrender.com/api/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const ordersResponse = await axios.get(
-        "http://localhost:5000/api/orders/all",
+        "https://gourmet-slice.onrender.com/api/orders/all",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -101,8 +101,8 @@ const Admin = () => {
 
     try {
       const url = editingProductId
-        ? `http://localhost:5000/api/products/${editingProductId}`
-        : "http://localhost:5000/api/products";
+        ? `https://gourmet-slice.onrender.com/api/products/${editingProductId}`
+        : "https://gourmet-slice.onrender.com/api/products";
 
       const method = editingProductId ? "put" : "post";
 
@@ -143,7 +143,7 @@ const Admin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/products/${id}`);
+        await axios.delete(`https://gourmet-slice.onrender.com/api/products/${id}`);
         setMessage("Product deleted successfully!");
         fetchProducts();
       } catch (err) {
@@ -303,7 +303,7 @@ const Admin = () => {
                     <p>${product.price}</p>
                     {product.image && (
                       <img
-                        src={`http://localhost:5000/${product.image}`}
+                        src={`https://gourmet-slice.onrender.com/${product.image}`}
                         alt={product.name}
                         className="mt-2 h-24 w-24 object-cover"
                       />
