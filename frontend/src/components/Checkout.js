@@ -145,8 +145,8 @@ const Checkout = () => {
   return (
     <>
       <NavigationBar />
-      <div className="bg-gradient-to-r from-blue-50 to-white min-h-screen py-10">
-        <div className="container mx-auto mt-5">
+      <div className="bg-custWhite text-custBlack min-h-screen py-10">
+        <div className="container mx-auto px-4 mt-5">
           <h2 className="text-center mb-4 text-4xl font-bold text-gray-800">
             Checkout Your Delicious Meal
           </h2>
@@ -186,8 +186,8 @@ const Checkout = () => {
           <div className="text-center mt-4">
             <h4 className="text-lg font-semibold">Your Order Summary</h4>
             <div className="d-flex justify-content-center">
-              <table className="table-auto w-full mt-2 border-collapse border border-gray-200">
-                <thead className="bg-blue-200">
+              <table className="bg-white table-auto w-full mt-2 border-collapse border border-gray-200">
+                <thead>
                   <tr>
                     <th className="border border-gray-300 px-4 py-2">Item</th>
                     <th className="border border-gray-300 px-4 py-2">
@@ -206,30 +206,32 @@ const Checkout = () => {
                         {item.quantity}
                       </td>
                       <td className="border border-gray-300 px-4 py-2">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        &#8377;{(item.price * item.quantity).toFixed(2)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-                <tfoot>
-                  <tr className="bg-gray-100">
+                <tfoot className="bg-gray-100">
+                  <tr>
                     <td colSpan="2" className="text-right font-bold">
                       Subtotal:
                     </td>
-                    <td className="font-bold">${subtotal.toFixed(2)}</td>
+                    <td className="font-bold">&#8377;{subtotal.toFixed(2)}</td>
                   </tr>
-                  <tr className="bg-gray-100">
+                  <tr>
                     <td colSpan="2" className="text-right font-bold">
                       Delivery Fee:
                     </td>
-                    <td className="font-bold">${deliveryFee.toFixed(2)}</td>
+                    <td className="font-bold">
+                      &#8377;{deliveryFee.toFixed(2)}
+                    </td>
                   </tr>
-                  <tr className="font-bold">
+                  <tr className="font-bold bg-gray-200 text-xl">
                     <td colSpan="2" className="text-right">
                       Total:
                     </td>
                     <td className="text-lg font-bold">
-                      ${totalPrice.toFixed(2)}
+                      &#8377;{totalPrice.toFixed(2)}
                     </td>
                   </tr>
                 </tfoot>
@@ -257,7 +259,7 @@ const Checkout = () => {
               type="text"
               className="form-control mt-2 border rounded-md p-3 shadow-md"
               value={cardNumber}
-              onChange={handleCardNumberChange}
+              onChange={(e) => setCardNumber(e.target.value)}
               placeholder="Enter your card number"
               required
               autoComplete="off"
@@ -269,7 +271,7 @@ const Checkout = () => {
               type="text"
               className="form-control mt-2 border rounded-md p-3 shadow-md"
               value={expiryDate}
-              onChange={handleExpiryDateChange}
+              onChange={(e) => setExpiryDate(e.target.value)}
               placeholder="MM/YY"
               required
               autoComplete="off"

@@ -103,11 +103,10 @@ const OrderFood = () => {
   return (
     <>
       <NavigationBar />
-      <div className="bg-gradient-to-r from-blue-50 to-white min-h-screen py-10">
+      <div className=" min-h-screen py-10">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-6 text-4xl font-bold text-gray-800 shadow-md p-4 rounded-md bg-white">
-            <FaUtensils className="inline-block mr-2 text-blue-600" />
-            Food Order Page
+          <h2 className="text-center mb-6 text-4xl font-bold text-custBlack bg-white p-4 rounded-md">
+            Menu
           </h2>
 
           <div className="flex flex-col md:flex-row">
@@ -119,7 +118,7 @@ const OrderFood = () => {
               </div>
               <div className="relative">
                 <button
-                  className="w-full border border-gray-300 rounded-md p-2 bg-white text-left shadow-sm hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-300"
+                  className="w-full border border-gray-300 rounded-md p-2 bg-white text-left hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-300"
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                 >
                   {selectedCategory}
@@ -128,7 +127,7 @@ const OrderFood = () => {
                   </span>
                 </button>
                 {isDropdownOpen && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg">
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-md -lg">
                     {["All", "Veg", "Non-Veg", "Beverage"].map((category) => (
                       <button
                         key={category}
@@ -154,7 +153,7 @@ const OrderFood = () => {
                 {filteredItems.length > 0 ? (
                   filteredItems.map((item) => (
                     <div
-                      className="bg-white shadow-lg rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl p-4 flex flex-col"
+                      className="bg-white rounded-lg transition-all hover:scale-105 hover:shadow-xl duration-500 p-4 flex flex-col"
                       key={item._id}
                     >
                       <img
@@ -174,7 +173,7 @@ const OrderFood = () => {
                       </h5>
                       <p className="text-gray-600 mb-2">{item.description}</p>
                       <p className="text-lg font-bold text-gray-800 mb-4">
-                        ${item.price.toFixed(2)}
+                        &#8377;{item.price.toFixed(2)}
                       </p>
                       <div className="flex items-center mb-4">
                         <button

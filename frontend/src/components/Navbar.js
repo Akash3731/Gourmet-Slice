@@ -55,24 +55,16 @@ const NavigationBar = () => {
   }, [isLoggedIn, user]);
 
   return (
-    <nav className="bg-red-600 shadow-lg w-full">
-      <div className="container mx-auto flex justify-between items-center px-6 py-4">
-        <div className="text-white text-3xl font-bold transition-transform transform hover:scale-105">
+    <div id="header" className="bg-custWhite sticky top-0 z-10">
+      <div className="flex items-center justify-evenly text-custOrange py-7 font-bold ">
+        <div className=" text-3xl font-bold transition-transform transform hover:scale-105">
           <Link to="/">Gourmet Slice</Link>
         </div>
 
         <ul className="hidden md:flex space-x-8">
           <li>
-            <Link
-              className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
             <a
-              className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+              className=" transition duration-200 hover:scale-105"
               href="#about"
             >
               About
@@ -80,7 +72,7 @@ const NavigationBar = () => {
           </li>
           <li>
             <a
-              className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+              className=" transition duration-200 hover:scale-105"
               href="#contact"
             >
               Contact
@@ -89,7 +81,7 @@ const NavigationBar = () => {
           {isLoggedIn && (
             <li>
               <Link
-                className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+                className=" transition duration-200 hover:scale-105"
                 to="/my-orders"
               >
                 My Orders
@@ -102,7 +94,7 @@ const NavigationBar = () => {
             <>
               <Link
                 to="/cart"
-                className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+                className=" transition duration-200 hover:scale-105"
               >
                 Cart ({totalItems})
               </Link>
@@ -122,7 +114,7 @@ const NavigationBar = () => {
                       }}
                     />
                   ) : (
-                    <FaUserCircle className="text-white w-10 h-10" />
+                    <FaUserCircle className=" w-10 h-10" />
                   )}
                 </button>
                 {dropdownOpen && (
@@ -147,20 +139,20 @@ const NavigationBar = () => {
           ) : (
             <>
               <Link
-                className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+                className=" transition duration-200 hover:scale-105"
                 to="/login"
               >
                 Login
               </Link>
               <Link
-                className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+                className=" transition duration-200 hover:scale-105"
                 to="/sign-up"
               >
                 Sign Up
               </Link>
               <Link
                 to="/cart"
-                className="text-white hover:text-yellow-300 transition duration-200 hover:scale-105"
+                className=" transition duration-200 hover:scale-105"
               >
                 Cart ({totalItems})
               </Link>
@@ -187,7 +179,7 @@ const NavigationBar = () => {
           </button>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

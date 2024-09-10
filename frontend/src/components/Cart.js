@@ -22,12 +22,12 @@ const Cart = () => {
     return (
       <>
         <NavigationBar />
-        <div className="bg-gradient-to-r from-blue-50 to-white min-h-screen py-10">
-          <div className="container mx-auto mt-5">
+        <div className="bg-gray-100 min-h-screen py-10">
+          <div className="container mx-auto px-4 mt-5">
             <h2 className="text-center mb-4 text-4xl font-bold text-gray-800">
               Your Cart
             </h2>
-            <div className="alert alert-warning text-center" role="alert">
+            <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg text-center">
               You are not logged in. Please log in first.
             </div>
           </div>
@@ -39,8 +39,8 @@ const Cart = () => {
   return (
     <>
       <NavigationBar />
-      <div className="bg-gradient-to-r from-blue-50 to-white min-h-screen py-10">
-        <div className="container mx-auto mt-5">
+      <div className="bg-custWhite min-h-screen py-10">
+        <div className="container mx-auto px-4 mt-5">
           <h2 className="text-center mb-4 text-4xl font-bold text-gray-800">
             <FaShoppingCart className="inline-block mr-2 text-blue-600" />
             Your Cart
@@ -48,33 +48,32 @@ const Cart = () => {
           {cart.length > 0 ? (
             <>
               {/* Cart Details Section */}
-              <div className="table-responsive mb-8">
-                <table className="table table-hover w-full border border-gray-300 rounded-lg shadow-md">
+              <div className="overflow-x-auto mb-8">
+                <table className="w-full bg-white border border-gray-300 rounded-lg shadow-md">
                   <thead className="bg-gray-200">
                     <tr>
-                      <th scope="col">Image</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">Actions</th>
+                      <th className="p-2 text-left">Image</th>
+                      <th className="p-2 text-left">Name</th>
+                      <th className="p-2 text-left">Description</th>
+                      <th className="p-2 text-left">Price</th>
+                      <th className="p-2 text-left">Quantity</th>
+                      <th className="p-2 text-left">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {cart.map((item) => (
-                      <tr key={item._id} className="align-middle">
-                        <td>
+                      <tr key={item._id} className="border-b border-gray-200">
+                        <td className="p-2">
                           <img
                             src={item.image}
                             alt={item.name}
-                            className="img-fluid rounded"
-                            style={{ width: "100px", height: "auto" }}
+                            className="w-24 h-auto rounded"
                           />
                         </td>
-                        <td>{item.name}</td>
-                        <td>{item.description}</td>
-                        <td>${item.price.toFixed(2)}</td>
-                        <td>
+                        <td className="p-2">{item.name}</td>
+                        <td className="p-2">{item.description}</td>
+                        <td className="p-2">&#8377;{item.price.toFixed(2)}</td>
+                        <td className="p-2">
                           <div className="flex items-center">
                             <button
                               className="bg-gray-200 rounded-full p-2 mr-2 hover:bg-gray-300 transition duration-200"
@@ -84,16 +83,16 @@ const Cart = () => {
                             </button>
                             <span>{item.quantity}</span>
                             <button
-                              className="bg-gray-200 rounded-full p-2 ms-2 hover:bg-gray-300 transition duration-200"
+                              className="bg-gray-200 rounded-full p-2 ml-2 hover:bg-gray-300 transition duration-200"
                               onClick={() => increaseQuantity(item._id)}
                             >
                               <FaPlus className="text-gray-600" />
                             </button>
                           </div>
                         </td>
-                        <td>
+                        <td className="p-2">
                           <button
-                            className="bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-200 py-1 px-1 text-md"
+                            className="bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-200 py-1 px-2 text-sm"
                             onClick={() => removeFromCart(item._id)}
                           >
                             Remove
@@ -106,21 +105,21 @@ const Cart = () => {
               </div>
 
               {/* Order Summary Section */}
-              <div className="border border-gray-300 rounded-lg p-6 shadow-lg bg-white mb-8">
+              <div className="bg-white rounded-xl p-6 shadow-lg mb-8">
                 <h4 className="text-2xl font-bold text-center mb-4">
                   Order Summary
                 </h4>
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <span className="font-semibold">Subtotal:</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>&#8377;{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <span className="font-semibold">Delivery Fee:</span>
-                  <span>${deliveryFee.toFixed(2)}</span>
+                  <span>&#8377;{deliveryFee.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between py-2 font-bold text-lg">
                   <span>Total:</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+                  <span>&#8377;{totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="text-center mt-4">
                   <button
