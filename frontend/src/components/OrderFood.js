@@ -14,8 +14,16 @@ import {
   FaCoffee, // Beverage icon
 } from "react-icons/fa";
 
+// Spinner Component
+const Spinner = () => (
+  <div className="flex justify-center items-center">
+    <div className="w-16 h-16 border-b-4 border-blue-600 rounded-full animate-spin"></div>
+  </div>
+);
+
 const OrderFood = () => {
   const [foodItems, setFoodItems] = useState([]);
+  const [loading, setLoading] = useState(true); // Added loading state
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [quantities, setQuantities] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -38,8 +46,10 @@ const OrderFood = () => {
           initialQuantities[item._id] = 0;
         });
         setQuantities(initialQuantities);
+        setLoading(false); // Stop loading once the data is fetched
       } catch (err) {
         console.error("Error fetching food items:", err);
+        setLoading(false); // Stop loading even if there's an error
       }
     };
 
@@ -150,7 +160,9 @@ const OrderFood = () => {
             {/* Food Items Section */}
             <div className="flex-grow">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredItems.length > 0 ? (
+                {loading ? (
+                  <Spinner />
+                ) : filteredItems.length > 0 ? (
                   filteredItems.map((item) => (
                     <div
                       className="bg-white rounded-lg transition-all hover:scale-105 hover:shadow-xl duration-500 p-4 flex flex-col"
@@ -202,9 +214,7 @@ const OrderFood = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-center text-lg text-gray-600 col-span-full">
-                    No food items available for this category.
-                  </p>
+                  <Spinner />
                 )}
               </div>
             </div>
